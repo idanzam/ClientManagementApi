@@ -25,7 +25,7 @@ namespace ClientManagementApi.Controllers
         public async Task<ActionResult<IEnumerable<Client>>> GetClients()
         {
             _logger.LogInformation("GetClients called");
-            var clients = await _context.Clients.ToListAsync();
+            var clients = await _context.Clients.OrderByDescending(a => a.id).ToListAsync();
             if (clients == null || clients.Count == 0)
             {
                 _logger.LogWarning("No clients found");
